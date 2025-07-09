@@ -4,26 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit converter</title>
+    <link rel="stylesheet" href="custom.css">
 </head>
 <body>
     <div id="unit-converter">
-        <input id="display" readonly>
-    <div id="select-unit">        
+        <h1>Unit Converter</h1>
+        <p>Convert between different units of measurement.</p>
+    <div id="input-box">        
         <label for="unit-select1">Choose the first unit:</label>
         <select id="unit-select1" name="units1">
             <option value="meters">Meters</option>
             <option value="kilometers">Kilometers</option>
             <option value="miles">Miles</option>
             <option value="feet">Feet</option>
+            <option value="inches">Inches</option>
+            <option value="yards">Yards</option>
         </select>
+        <input id="display1" write>
+    </div>
+    <div id="output-box">  
         <label for="unit-select2">Choose the second unit:</label>
         <select id="unit-select2" name="units2">
             <option value="meters">Meters</option>
             <option value="kilometers">Kilometers</option>
             <option value="miles">Miles</option>
             <option value="feet">Feet</option>
+            <option value="inches">Inches</option>
+            <option value="yards">Yards</option>
         </select>
+        <input id="display2" readonly>
     </div>
-    </div>
+    <button class="btn_operator" onclick="convertUnits()">Convert units</button>
+    </div>  
+    <script src="unit_conversion_alg.js"></script>
 </body>
 </html>
