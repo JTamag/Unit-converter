@@ -38,10 +38,28 @@ function convertUnits(){
         const valueInGrams = value * toGrams[fromUnit];
         result = valueInGrams / toGrams[toUnit];
     }
+    if(unitType === "Temperature"){
+        if (fromUnit === toUnit) {
+            result = value; 
+        } 
+        let valueInKelvin;
+        if(fromUnit === 'Celsius') {
+            valueInKelvin = value + 273.15;
+        }else if(fromUnit === 'Fahrenheit') {
+            valueInKelvin = (value - 32) * 5/9 + 273.15;
+        } else if(fromUnit === 'Kelvin') {
+            valueInKelvin = value;
+        }
+        if(toUnit === 'Celsius') {
+            result = valueInKelvin - 273.15;
+        } else if(toUnit === 'Fahrenheit') {
+            result = (valueInKelvin - 273.15) * 9/5 + 32;
+        } else if(toUnit === 'Kelvin') {
+            result = valueInKelvin;
+        }
+    }
     document.getElementById('display1').value = value+ ' ' + fromUnit;
     document.getElementById('display2').value = result+ ' ' + toUnit; 
-     
-
 }
 function Weight(){
     unitType = "Weight";
@@ -83,5 +101,18 @@ function Length(){
         <option value="Feet">Feet</option>;
         <option value="Inches">Inches</option>;
         <option value="Yards">Yards</option>;
+        `;
+}
+function Temperature(){
+    unitType = "Temperature";
+    document.getElementById('unit-select1').innerHTML = `
+        <option value="Celsius">Celsius</option>;
+        <option value="Fahrenheit">Fahrenheit</option>;
+        <option value="Kelvin">Kelvin</option>;
+        `;
+    document.getElementById('unit-select2').innerHTML = `
+        <option value="Celsius">Celsius</option>;
+        <option value="Fahrenheit">Fahrenheit</option>;
+        <option value="Kelvin">Kelvin</option>;
         `;
 }
