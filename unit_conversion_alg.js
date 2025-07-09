@@ -1,10 +1,13 @@
 let unitType = "Length";
-function convertUnits(){
+function convertUnits(){ 
+    if(document.getElementById('display1').value.trim() === ''){
+        alert("Please enter a value.");
+        return;
+    }
     const value = parseFloat(document.getElementById('display1').value);
     const fromUnit = document.getElementById('unit-select1').value;
     const toUnit = document.getElementById('unit-select2').value;
-
-    if (isNaN(value)) {
+    if (isNaN(value) || (value < 0 && unitType !== "Temperature")) {
         document.getElementById('display2').value = "Invalid input";
         return;
     }
@@ -58,61 +61,164 @@ function convertUnits(){
             result = valueInKelvin;
         }
     }
+    if(unitType === "Time"){
+        const toSeconds = {
+            'Milliseconds': 0.001,
+            'Seconds': 1,
+            'Minutes': 60,
+            'Hours': 3600,
+            'Days': 86400,
+            'Weeks': 604800,
+            'Months': 2629800, 
+            'Years': 31557600 
+        };
+
+        const valueInSeconds = value * toSeconds[fromUnit];
+        result = valueInSeconds / toSeconds[toUnit];
+    }
+    if(unitType === "Area"){
+        const toSquareMeters = {
+            'Square Millimeters': 0.000001,
+            'Square Centimeters': 0.0001,
+            'Square Meters': 1,
+            'Square Kilometers': 1000000,
+            'Acres': 4046.86,
+            'Hectares': 10000
+        }
+        const valueInSquareMeters = value * toSquareMeters[fromUnit];
+        result = valueInSquareMeters / toSquareMeters[toUnit];
+    }
+    if(unitType === "Volume"){
+        const toCubicMeters = {
+            'Milliliters': 0.000001,
+            'Liters': 0.001,
+            'Cubic Meters': 1,
+            'Cubic Centimeters': 0.000001,
+            'Cubic Inches': 0.0000163871,
+            'Cubic Feet': 0.0283168,
+            'Gallons': 0.00378541
+        }
+        const valueInCubicMeters = value * toCubicMeters[fromUnit];
+        result = valueInCubicMeters / toCubicMeters[toUnit];
+    }
     document.getElementById('display1').value = value+ ' ' + fromUnit;
     document.getElementById('display2').value = result+ ' ' + toUnit; 
 }
 function Weight(){
     unitType = "Weight";
     document.getElementById('unit-select1').innerHTML = `
-        <option value="Milligrams">Milligrams</option>;
-        <option value="Grams">Grams</option>;
-        <option value="Kilograms">Kilograms</option>;
-        <option value="Metric Tons">Metric Tons</option>;
-        <option value="Pounds">Pounds</option>;
-        <option value="Ounces">Ounces</option>;
+        <option value="Milligrams">Milligrams</option>
+        <option value="Grams">Grams</option>
+        <option value="Kilograms">Kilograms</option>
+        <option value="Metric Tons">Metric Tons</option>
+        <option value="Pounds">Pounds</option>
+        <option value="Ounces">Ounces</option>
         `;
     document.getElementById('unit-select2').innerHTML = `
-        <option value="Milligrams">Milligrams</option>;
-        <option value="Grams">Grams</option>;
-        <option value="Kilograms">Kilograms</option>;
-        <option value="Metric Tons">Metric Tons</option>;
-        <option value="Pounds">Pounds</option>;
-        <option value="Ounces">Ounces</option>;
+        <option value="Milligrams">Milligrams</option>
+        <option value="Grams">Grams</option>
+        <option value="Kilograms">Kilograms</option>
+        <option value="Metric Tons">Metric Tons</option>
+        <option value="Pounds">Pounds</option>
+        <option value="Ounces">Ounces</option>
         `;
 }
 function Length(){
     unitType = "Length";
     document.getElementById('unit-select1').innerHTML = `
-        <option value="Millimetres">Millimetres</option>;
-        <option value="Centimeters">Centimeters</option>;
-        <option value="Meters">Meters</option>;
-        <option value="Kilometers">Kilometers</option>;
-        <option value="Miles">Miles</option>;
-        <option value="Feet">Feet</option>;
-        <option value="Inches">Inches</option>;
-        <option value="Yards">Yards</option>;
+        <option value="Millimetres">Millimetres</option>
+        <option value="Centimeters">Centimeters</option>
+        <option value="Meters">Meters</option>
+        <option value="Kilometers">Kilometers</option>
+        <option value="Miles">Miles</option>
+        <option value="Feet">Feet</option>
+        <option value="Inches">Inches</option>
+        <option value="Yards">Yards</option>
         `;
     document.getElementById('unit-select2').innerHTML = `
-        <option value="Millimetres">Millimetres</option>;
-        <option value="Centimeters">Centimeters</option>;
-        <option value="Meters">Meters</option>;
-        <option value="Kilometers">Kilometers</option>;
-        <option value="Miles">Miles</option>;
-        <option value="Feet">Feet</option>;
-        <option value="Inches">Inches</option>;
-        <option value="Yards">Yards</option>;
+        <option value="Millimetres">Millimetres</option>
+        <option value="Centimeters">Centimeters</option>
+        <option value="Meters">Meters</option>
+        <option value="Kilometers">Kilometers</option>
+        <option value="Miles">Miles</option>
+        <option value="Feet">Feet</option>
+        <option value="Inches">Inches</option>
+        <option value="Yards">Yards</option>
         `;
 }
 function Temperature(){
     unitType = "Temperature";
     document.getElementById('unit-select1').innerHTML = `
-        <option value="Celsius">Celsius</option>;
-        <option value="Fahrenheit">Fahrenheit</option>;
-        <option value="Kelvin">Kelvin</option>;
+        <option value="Celsius">Celsius</option>
+        <option value="Fahrenheit">Fahrenheit</option>
+        <option value="Kelvin">Kelvin</option>
         `;
     document.getElementById('unit-select2').innerHTML = `
-        <option value="Celsius">Celsius</option>;
-        <option value="Fahrenheit">Fahrenheit</option>;
-        <option value="Kelvin">Kelvin</option>;
+        <option value="Celsius">Celsius</option>
+        <option value="Fahrenheit">Fahrenheit</option>
+        <option value="Kelvin">Kelvin</option>
+        `;
+}
+function Time() {
+    unitType = "Time";
+    document.getElementById('unit-select1').innerHTML = `
+        <option value="Milliseconds">Milliseconds</option>
+        <option value="Seconds">Seconds</option>
+        <option value="Minutes">Minutes</option>
+        <option value="Hours">Hours</option>
+        <option value="Days">Days</option>
+        <option value="Weeks">Weeks</option>
+        <option value="Months">Months</option>
+        <option value="Years">Years</option>
+        `;
+    document.getElementById('unit-select2').innerHTML = `
+        <option value="Milliseconds">Milliseconds</option>
+        <option value="Seconds">Seconds</option>
+        <option value="Minutes">Minutes</option>
+        <option value="Hours">Hours</option>
+        <option value="Days">Days</option>
+        <option value="Weeks">Weeks</option>
+        <option value="Months">Months</option>
+        <option value="Years">Years</option>
+        `;
+}
+function Area() {
+    unitType = "Area";
+    document.getElementById('unit-select1').innerHTML = `
+        <option value="Square Millimeters">Square Millimeters</option>
+        <option value="Square Centimeters">Square Centimeters</option>
+        <option value="Square Meters">Square Meters</option>
+        <option value="Square Kilometers">Square Kilometers</option>
+        <option value="Acres">Acres</option>
+        <option value="Hectares">Hectares</option>
+        `;
+    document.getElementById('unit-select2').innerHTML = `
+        <option value="Square Millimeters">Square Millimeters</option>
+        <option value="Square Centimeters">Square Centimeters</option>
+        <option value="Square Meters">Square Meters</option>
+        <option value="Square Kilometers">Square Kilometers</option>
+        <option value="Acres">Acres</option>
+        <option value="Hectares">Hectares</option>
+        `;
+}
+function Volume() {
+    unitType = "Volume";
+    document.getElementById('unit-select1').innerHTML = `
+        <option value="Milliliters">Milliliters</option>
+        <option value="Liters">Liters</option>
+        <option value="Cubic Meters">Cubic Meters</option>
+        <option value="Cubic Centimeters">Cubic Centimeters</option>
+        <option value="Cubic Inches">Cubic Inches</option>
+        <option value="Cubic Feet">Cubic Feet</option>
+        <option value="Gallons">Gallons</option>
+        `;
+    document.getElementById('unit-select2').innerHTML = `
+        <option value="Milliliters">Milliliters</option>
+        <option value="Liters">Liters</option>
+        <option value="Cubic Meters">Cubic Meters</option>
+        <option value="Cubic Centimeters">Cubic Centimeters</option>
+        <option value="Cubic Inches">Cubic Inches</option>
+        <option value="Cubic Feet">Cubic Feet</option>
+        <option value="Gallons">Gallons</option>
         `;
 }
