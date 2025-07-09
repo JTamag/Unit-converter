@@ -48,3 +48,20 @@ button.btn_operator:hover {
 button.btn_operator:active {
     background-color: #1e7e34;
 }
+button.btn_operator2 {
+    width: 19%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+button.btn_operator2:hover {
+    background-color: #218838;
+}
+button.btn_operator2:active {
+    background-color: #1e7e34;
+}
