@@ -107,7 +107,7 @@ function convertUnits(){
 function swapUnits(){
     const select1 = document.getElementById('unit-select1');
     const select2 = document.getElementById('unit-select2');
-    const tempValue = select1.value;+
+    const tempValue = select1.value;
     select1.value = select2.value;
     select2.value = tempValue;
     convertUnits();
