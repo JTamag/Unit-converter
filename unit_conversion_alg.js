@@ -104,6 +104,14 @@ function convertUnits(){
     document.getElementById('display1').value = value+ ' ' + fromUnit;
     document.getElementById('display2').value = result+ ' ' + toUnit; 
 }
+function swapUnits(){
+    const select1 = document.getElementById('unit-select1');
+    const select2 = document.getElementById('unit-select2');
+    const tempValue = select1.value;+
+    select1.value = select2.value;
+    select2.value = tempValue;
+    convertUnits();
+}
 function Weight(){
     unitType = "Weight";
     document.getElementById('unit-select1').innerHTML = `
